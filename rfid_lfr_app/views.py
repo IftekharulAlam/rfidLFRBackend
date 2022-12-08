@@ -8,13 +8,24 @@ import json
 from django.http import HttpResponse, JsonResponse
 
 
-def sendTempHumData(request):
+def writelocation(request):
     if request.method == 'GET':
-        temperature = request.GET.get("temperature", False)
-        humidity = request.GET.get("humidity", False)
-
+        Location = request.GET.get("Location", False)
         with connection.cursor() as cursor_1:
             cursor_1.execute(
-                "INSERT INTO mydata(tempData, humidity) VALUES ('"+str(temperature) + "','"+str(humidity) + "' )")
+                "INSERT INTO bot_location(Location) VALUES ('"+str(Location) + "' )")
     return HttpResponse("Hello, world. You're at the polls index.")
+
+def readlocation(request):
+    if request.method == 'GET':
+        with connection.cursor() as cursor_1:
+            cursor_1.execute("select Serial, Location from bot_location")
+            row1 = cursor_1.fetchall()
+            result = []
+            keys = ('Serial', 'Location')
+            for row in row1:
+                result.append(dict(zip(keys, row)))
+            json_data = json.dumps(result)
+            return HttpResponse(json_data, content_type="application/json")
+
 

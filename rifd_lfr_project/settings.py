@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-**+mdnn-wyg=$)4!(*6r07!@pg=s$74!3w5e=!^*d12uj^p()f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,7 +76,7 @@ WSGI_APPLICATION = "rifd_lfr_project.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
+        'NAME': 'rfid_lfr',
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'USER':'iftekharulalam',
